@@ -93,7 +93,7 @@ export const Message = styled.p`
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.5;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 1.5);
 `;
 
 const Photo = styled.div`
@@ -138,9 +138,9 @@ const RSVPWrapper = styled.div`
 const Location = styled.a`
   margin-top: 2rem;
   font-size: 1.2rem;
-  color: #555;
+  color: #000000ff;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 1.5);
   &:hover {
     color: #ff1493;
     text-decoration: underline;
