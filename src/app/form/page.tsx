@@ -57,7 +57,7 @@ const Field = styled.div`
 const Label = styled.label`
   font-weight: 600;
   font-size: 1rem;
-  color: #333;
+  color: #e92b8aff;
   margin-left: 10px;
 `;
 
@@ -74,6 +74,7 @@ const Input = styled.input`
     box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
   }
 `;
+
 //appearance: none; toglie tutti default di stile della select
 const Select = styled.select`
   padding: 0.85rem 1rem;
@@ -83,7 +84,7 @@ const Select = styled.select`
   outline: none;
   transition: all 0.25s ease;
 
-  appearance: none; 
+  appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 1rem center;
@@ -249,17 +250,17 @@ export default function FormPage() {
           {partecipanti.map((p) => (
             <ParticipantCard key={p.id}>
               <Field>
-                <Label>Nome</Label>
+                <Label>Nome 👤</Label>
                 <Input type="text" placeholder="Mario" value={p.name} onChange={(e) => handlePartecipanteChange(p.id, "name", e.target.value)} required />
               </Field>
 
               <Field>
-                <Label>Cognome</Label>
+                <Label>Cognome 🏷️</Label>
                 <Input type="text" placeholder="Rossi" value={p.surname} onChange={(e) => handlePartecipanteChange(p.id, "surname", e.target.value)} required />
               </Field>
 
               <Field>
-                <Label>Tipologia di menù</Label>
+                <Label>Tipologia di menù 🍽️</Label>
                 <Select value={p.menu} onChange={(e) => handlePartecipanteChange(p.id, "menu", e.target.value)}>
                   {p.tipo === "Bambino" ? (
                     <option value="Bambini">Bambini</option>
@@ -277,7 +278,7 @@ export default function FormPage() {
               </Field>
 
               <Field>
-                <Label>Intolleranze</Label>
+                <Label>Intolleranze ⚠️</Label>
                 <Select value={p.intolerance} onChange={(e) => handlePartecipanteChange(p.id, "intolerance", e.target.value)}>
                   <option value="Nessuna">Nessuna</option>
                   <option value="Glutine">Glutine</option>
@@ -295,7 +296,7 @@ export default function FormPage() {
                 <ButtonRemove
                   type="button"
                   onClick={(e) => {
-                    const card = (e.currentTarget as HTMLButtonElement).closest("div"); // il ParticipantCard
+                    const card = (e.currentTarget as HTMLButtonElement).closest("div"); 
                     removePartecipante(p.id);
 
                     // scrolla al prossimo partecipante rimasto
@@ -313,14 +314,14 @@ export default function FormPage() {
 
           <ButtonGrid>
             <Button type="button" onClick={() => addPartecipante("Adulto")}>
-              + Adulto
+             ➕ Adulto
             </Button>
             <Button type="button" onClick={() => addPartecipante("Bambino")}>
-              + Bambino
+             ➕ Bambino
             </Button>
           </ButtonGrid>
           <Field>
-            <Label>Note aggiuntive</Label>
+            <Label>Note aggiuntive 📝</Label>
             <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Scrivi qui eventuali richieste particolari..." />
           </Field>
           <ButtonGrid>
