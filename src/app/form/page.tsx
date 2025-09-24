@@ -283,7 +283,19 @@ export default function FormPage() {
               </Field>
 
               {partecipanti.length > 1 && (
-                <ButtonRemove type="button" onClick={() => removePartecipante(p.id)}>
+                <ButtonRemove
+                  type="button"
+                  onClick={(e) => {
+                    const card = (e.currentTarget as HTMLButtonElement).closest("div"); // il ParticipantCard
+                    removePartecipante(p.id);
+
+                    // scrolla al prossimo partecipante rimasto
+                    const nextCard = card?.nextElementSibling as HTMLElement | null;
+                    if (nextCard) {
+                      nextCard.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                >
                   Rimuovi
                 </ButtonRemove>
               )}

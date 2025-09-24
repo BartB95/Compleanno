@@ -139,7 +139,7 @@ const Location = styled.a`
   }
 `;
 
-// Home Page
+
 export default function Home() {
   const targetDate = "2026-01-17T19:00:00";
 
