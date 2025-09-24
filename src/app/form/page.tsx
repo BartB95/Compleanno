@@ -160,15 +160,6 @@ const ParticipantCard = styled.div`
   box-shadow: 0 5px 20px rgba(255, 20, 147, 1);
 `;
 
-const SuccessMessage = styled.p`
-  margin-top: 2rem;
-  font-weight: 700;
-  color: #ff1493;
-  text-align: center;
-  font-size: 1.3rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-`;
-
 export type Partecipante = {
   id: number;
   name: string;
@@ -272,8 +263,7 @@ export default function FormPage() {
                       <option value="Vegetariano">Vegetariano</option>
                       <option value="Vegano">Vegano</option>
                       <option value="Senza glutine">Senza glutine</option>
-                      <option value="Latticini free">Latticini free</option>
-                      <option value="Keto">Keto</option>
+                      <option value="Senza latticini">Senza latticini</option>
                     </>
                   )}
                 </Select>

@@ -150,7 +150,7 @@ export default function Home() {
         <Image src="/rosa.jpeg" alt="Rossella" width={220} height={220} style={{ objectFit: "cover" }} priority />
       </Photo>
       <Message>Vuoi venire al mio primo compleanno? 🎂 Ti aspetto con tanta gioia, non mancare! 💖 Sarà una festa piena di sorrisi e divertimento! ✨</Message>
-      <DateInfo>📅 17 Gennaio 2026 alle 19:00</DateInfo>
+      <DateInfo>17 Gennaio 2026 alle 19:00</DateInfo>
       <CountdownWrapper>
         <Countdown targetDate={targetDate} />
         <BigOne>1 Anno!! 🎈</BigOne>
