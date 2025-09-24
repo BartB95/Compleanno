@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import Countdown from "./Countdown";
 import RSVPForm from "./RSVPForm";
 import Image from "next/image";
+import { useMemo } from "react";
 import { ConfettiComponent } from "./Confetto";
 
 // Animazioni
@@ -31,6 +32,8 @@ const glow = keyframes`
   100% { box-shadow: 0 0 10px #ff69b4; }
 `;
 
+
+// Styled Components
 const Container = styled.div`
   position: relative;
   text-align: center;
@@ -44,6 +47,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    z-index: 0;
+  }
 `;
 
 const Title = styled.h1`
@@ -126,6 +139,7 @@ const Location = styled.a`
   }
 `;
 
+// Home Page
 export default function Home() {
   const targetDate = "2026-01-17T19:00:00";
 
