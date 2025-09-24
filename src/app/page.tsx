@@ -8,12 +8,21 @@ import Loader from "./components/Loader";
 
 const BackgroundWrapper = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: #ffe6f0; /* fallback colore */
-  z-index: -1;
+  z-index: -2; /* sotto tutto */
+`;
+
+const LoaderOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* sopra tutto */
+  background: rgba(255, 230, 240, 0.8); /* sfondo semitrasparente */
 `;
 
 const Page = () => {
@@ -24,13 +33,33 @@ const Page = () => {
     setMounted(true);
   }, []);
 
+  if (!mounted) return null;
+
   return (
     <>
+      {/* Background full-screen */}
       <BackgroundWrapper>
-        <Image src="/festa.jpg" alt="Sfondo festa" fill style={{ objectFit: "cover" }} priority />
-        {!showApp && <Loader onComplete={() => setShowApp(true)} />}
+        <Image
+          src="/festa.jpg"
+          alt="Sfondo festa"
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+        />
       </BackgroundWrapper>
 
+      {/* Loader sopra tutto */}
+      {!showApp && (
+        <LoaderOverlay>
+          <Loader
+            bgColor="transparent"
+            duration={1500}
+            onComplete={() => setShowApp(true)}
+          />
+        </LoaderOverlay>
+      )}
+
+      {/* App principale */}
       {mounted && showApp && <Home />}
     </>
   );
