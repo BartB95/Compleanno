@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { ConfettiComponent } from "../components/Confetto";
 import { StatusMessage } from "../components/Message";
@@ -184,6 +184,14 @@ export default function FormPage() {
   const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  // Poi usa un useEffect che scrolla quando confermato o errore
+  useEffect(() => {
+    if ((confirmed || error) && statusRef.current) {
+      statusRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [confirmed, error]);
 
   useEffect(() => setMounted(true), []);
 
@@ -233,7 +241,11 @@ export default function FormPage() {
 
   return (
     <Container>
-      {(confirmed || error) && <StatusMessage success={confirmed} error={error} name={confirmed ? partecipanti[0].name : undefined} surname={confirmed ? partecipanti[0].surname : undefined} />}
+      {(confirmed || error) && (
+        <div ref={statusRef}>
+          <StatusMessage success={confirmed} error={error} name={confirmed ? partecipanti[0].name : undefined} surname={confirmed ? partecipanti[0].surname : undefined} />
+        </div>
+      )}
       {!confirmed && !error && (
         <Form onSubmit={handleSubmit}>
           <Title>Conferma la tua presenza 🎉</Title>
