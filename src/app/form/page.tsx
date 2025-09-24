@@ -120,7 +120,7 @@ const ButtonGrid = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 0.7rem 1.5rem;
+  padding: 0.7rem 0.9rem;
   border-radius: 16px;
   border: none;
   background: linear-gradient(45deg, #ff69b4, #ff1493, #ff85b1, #ff69b4);
