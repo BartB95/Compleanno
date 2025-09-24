@@ -74,7 +74,7 @@ const Input = styled.input`
     box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
   }
 `;
-
+//appearance: none; toglie tutti default di stile della select
 const Select = styled.select`
   padding: 0.85rem 1rem;
   border-radius: 14px;
@@ -82,6 +82,12 @@ const Select = styled.select`
   font-size: 1rem;
   outline: none;
   transition: all 0.25s ease;
+
+  appearance: none; 
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 2rem;
 
   &:focus {
     border-color: #ff1493;
@@ -244,12 +250,12 @@ export default function FormPage() {
             <ParticipantCard key={p.id}>
               <Field>
                 <Label>Nome</Label>
-                <Input type="text" placeholder="Nome" value={p.name} onChange={(e) => handlePartecipanteChange(p.id, "name", e.target.value)} required />
+                <Input type="text" placeholder="Mario" value={p.name} onChange={(e) => handlePartecipanteChange(p.id, "name", e.target.value)} required />
               </Field>
 
               <Field>
                 <Label>Cognome</Label>
-                <Input type="text" placeholder="Cognome" value={p.surname} onChange={(e) => handlePartecipanteChange(p.id, "surname", e.target.value)} required />
+                <Input type="text" placeholder="Rossi" value={p.surname} onChange={(e) => handlePartecipanteChange(p.id, "surname", e.target.value)} required />
               </Field>
 
               <Field>
@@ -263,6 +269,7 @@ export default function FormPage() {
                       <option value="Vegetariano">Vegetariano</option>
                       <option value="Vegano">Vegano</option>
                       <option value="Senza glutine">Senza glutine</option>
+                      <option value="Celiaco">Celiaco</option>
                       <option value="Senza latticini">Senza latticini</option>
                     </>
                   )}

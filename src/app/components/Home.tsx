@@ -4,7 +4,6 @@ import styled, { keyframes } from "styled-components";
 import Countdown from "./Countdown";
 import RSVPForm from "./RSVPForm";
 import Image from "next/image";
-import { useMemo } from "react";
 import { ConfettiComponent } from "./Confetto";
 
 // Animazioni
@@ -33,7 +32,6 @@ const glow = keyframes`
 `;
 
 
-// Styled Components
 const Container = styled.div`
   position: relative;
   text-align: center;

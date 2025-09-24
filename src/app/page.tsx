@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 import Image from "next/image";
 import Home from "./components/Home";
 
-// Animazione rotazione per i dots
+
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
