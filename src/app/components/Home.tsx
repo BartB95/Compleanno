@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 import Countdown from "./Countdown";
 import RSVPForm from "./RSVPForm";
 import Image from "next/image";
-
+import { ConfettiComponent } from "./Confetto";
 
 // Animazioni
 const bounce = keyframes`
@@ -31,12 +31,6 @@ const glow = keyframes`
   100% { box-shadow: 0 0 10px #ff69b4; }
 `;
 
-const fall = keyframes`
-  0% { transform: translateY(-2rem) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-`;
-
-// Styled Components
 const Container = styled.div`
   position: relative;
   text-align: center;
@@ -50,22 +44,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0);
-    z-index: 0;
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
 `;
 
 const Title = styled.h1`
@@ -94,6 +72,7 @@ export const Message = styled.p`
   margin: 0 auto;
   line-height: 1.5;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 1.5);
+  background: linear-gradient(135deg, #ffd6e0, #ffc0cb, #ffe0b2, #ffd1dc);
 `;
 
 const Photo = styled.div`
@@ -136,10 +115,10 @@ const RSVPWrapper = styled.div`
 `;
 
 const Location = styled.a`
-  margin-top: 2rem;
   font-size: 1.2rem;
   color: #000000ff;
   cursor: pointer;
+  background: linear-gradient(135deg, #ffd6e0, #ffc0cb, #ffe0b2, #ffd1dc);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 1.5);
   &:hover {
     color: #ff1493;
@@ -147,42 +126,6 @@ const Location = styled.a`
   }
 `;
 
-// Confetti dinamico
-const ConfettiContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-`;
-
-const Confetto = styled.div<{ left: number; delay: number; size: number }>`
-  position: absolute;
-  top: -2rem;
-  left: ${(props) => props.left}%;
-  font-size: ${(props) => props.size}rem;
-  animation: ${fall} 5s linear infinite;
-  animation-delay: ${(props) => props.delay}s;
-`;
-
-function ConfettiComponent() {
-  const confettiCount = 30;
-  const confettiArray = Array.from({ length: confettiCount });
-
-  return (
-    <ConfettiContainer>
-      {confettiArray.map((_, i) => (
-        <Confetto key={i} left={Math.random() * 100} delay={Math.random() * 5} size={Math.random() * 1.5 + 0.8}>
-          ❤️
-        </Confetto>
-      ))}
-    </ConfettiContainer>
-  );
-}
-
-// Home Page
 export default function Home() {
   const targetDate = "2026-01-17T19:00:00";
 
@@ -190,19 +133,12 @@ export default function Home() {
     <Container>
       <Title>Il primo compleanno di Rossella! 🥳🎉</Title>
       <Photo>
-        <Image
-          src="/rosa.jpeg"
-          alt="Rossella"
-          width={220}
-          height={220}
-          style={{ objectFit: "cover" }}
-          priority
-        />
-        </Photo>
+        <Image src="/rosa.jpeg" alt="Rossella" width={220} height={220} style={{ objectFit: "cover" }} priority />
+      </Photo>
       <Message>Vuoi venire al mio primo compleanno? 🎂 Ti aspetto con tanta gioia, non mancare! 💖 Sarà una festa piena di sorrisi e divertimento! ✨</Message>
       <DateInfo>📅 17 Gennaio 2026 alle 19:00</DateInfo>
       <CountdownWrapper>
-        <Countdown  targetDate={targetDate} />
+        <Countdown targetDate={targetDate} />
         <BigOne>1 Anno!! 🎈</BigOne>
       </CountdownWrapper>
       <RSVPWrapper>
