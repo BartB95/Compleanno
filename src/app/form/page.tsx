@@ -5,6 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { ConfettiComponent } from "../components/Confetto";
 import { StatusMessage } from "../components/Message";
 import Link from "next/link";
+import Rocket from "../components/Rocket";
 
 // Animazione gradienti
 const gradientAnimation = keyframes`
@@ -120,6 +121,7 @@ const ButtonGrid = styled.div`
 `;
 
 const Button = styled.button`
+  position: relative;
   padding: 0.7rem 0.9rem;
   border-radius: 16px;
   border: none;
@@ -137,6 +139,12 @@ const Button = styled.button`
     transform: scale(1.08);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6), inset 0 -3px 8px rgba(0, 0, 0, 0.3);
   }
+`;
+
+const ButtonText = styled.span`
+  flex: 1; // prende tutta la larghezza disponibile
+  text-align: center;
+  transition: margin 0.2s ease;
 `;
 
 const ButtonRemove = styled.button`
@@ -183,6 +191,7 @@ export default function FormPage() {
   const [error, setError] = useState(false);
   const [mounted, setMounted] = useState(false);
   const statusRef = useRef<HTMLDivElement>(null);
+  const [isLaunching, setIsLaunching] = useState(false);
 
   // Poi usa un useEffect che scrolla quando confermato o errore
   useEffect(() => {
@@ -219,6 +228,10 @@ export default function FormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isLaunching) return;
+
+    setIsLaunching(true);
     try {
       const res = await fetch("/api/rsvp", {
         method: "POST",
@@ -296,7 +309,7 @@ export default function FormPage() {
                 <ButtonRemove
                   type="button"
                   onClick={(e) => {
-                    const card = (e.currentTarget as HTMLButtonElement).closest("div"); 
+                    const card = (e.currentTarget as HTMLButtonElement).closest("div");
                     removePartecipante(p.id);
 
                     // scrolla al prossimo partecipante rimasto
@@ -314,10 +327,10 @@ export default function FormPage() {
 
           <ButtonGrid>
             <Button type="button" onClick={() => addPartecipante("Adulto")}>
-             ➕ Adulto
+              ➕ Adulto
             </Button>
             <Button type="button" onClick={() => addPartecipante("Bambino")}>
-             ➕ Bambino
+              ➕ Bambino
             </Button>
           </ButtonGrid>
           <Field>
@@ -328,7 +341,11 @@ export default function FormPage() {
             <Link href="/" passHref>
               <Button>Indietro</Button>
             </Link>
-            <Button type="submit">Conferma</Button>
+
+            <Button type="submit" aria-disabled={isLaunching}>
+              <ButtonText>Conferma</ButtonText>
+              <Rocket isLaunching={isLaunching} />
+            </Button>
           </ButtonGrid>
         </Form>
       )}
